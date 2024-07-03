@@ -1,11 +1,10 @@
-export const deltaThreshold = 75;
 export const radius = 25;
 export const increment = 110;
 
-export const getPlanetPosition = (radius: number, angle: number) => {
+export const getPosition = (radius: number, angle: number) => {
   return {
-    left: `${radius + radius * Math.cos(angle)}px`,
-    bottom: `${radius * Math.sin(angle)}px`,
+    x: radius + radius * Math.cos(angle),
+    y: radius * Math.sin(angle),
   };
 };
 
