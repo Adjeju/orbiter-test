@@ -1,4 +1,4 @@
-import { increment } from "@/constants";
+import { RADIUS } from "@/modules/dashboard/constants";
 import { computed, onUnmounted } from "vue";
 import { onMounted, provide, ref } from "vue";
 
@@ -18,9 +18,9 @@ export const useOrbits = () => {
       return;
     }
 
-    const value = increment * (delta > 0 ? 1 : -1);
+    const value = RADIUS * (delta > 0 ? 1 : -1);
 
-    if (deltaY.value + value > increment * 8.5) {
+    if (deltaY.value + value > RADIUS * 8.5) {
       return;
     }
 
@@ -38,7 +38,7 @@ export const useOrbits = () => {
   });
 
   const centerX = computed(() => windowWidth.value / 2);
-  const current = computed(() => Math.floor(deltaY.value / increment));
+  const current = computed(() => Math.floor(deltaY.value / RADIUS));
 
   provide("centerX", centerX);
   provide("current", current);

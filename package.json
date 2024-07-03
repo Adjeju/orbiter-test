@@ -11,6 +11,9 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@tanstack/vue-query": "^5.49.1",
+    "date-fns": "^3.6.0",
+    "ky": "^1.4.0",
     "vue": "^3.4.29"
   },
   "devDependencies": {

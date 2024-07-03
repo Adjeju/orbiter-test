@@ -1,5 +1,7 @@
+import type { User } from "../../types";
+
 export type Props = {
-  message: any;
+  user: User;
   orbitRadius: number;
   position: { x: number; y: number };
 };

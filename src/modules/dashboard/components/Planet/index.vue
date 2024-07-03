@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import type { Props } from "./types";
 
 defineProps<Props>();
@@ -23,7 +22,7 @@ defineProps<Props>();
   border-radius: 50%;
   z-index: 10;
   transform: translate(-50%, 50%);
-  transition: 0.5s;
+  transition: 1s;
   background: blue;
 }
 </style>

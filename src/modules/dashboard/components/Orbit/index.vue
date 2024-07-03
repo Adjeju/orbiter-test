@@ -10,16 +10,16 @@
     }"
   >
     <Planet
-      v-for="(i, idx) in data"
-      :key="`planet-${position}-${idx}`"
-      :message="i"
+      v-for="(user, idx) in array"
+      :key="`planet-${position}-${user.id}`"
+      :user="user"
       :orbitRadius="orbitRadius"
       :position="
         getPosition(
           orbitRadius,
-          isMiddleElement(data.length, idx)
-            ? getAngles(data.length)[idx] + Math.PI / 18
-            : getAngles(data.length)[idx]
+          isMiddleElement(array.length, idx)
+            ? angles[idx] + Math.PI / 36
+            : angles[idx]
         )
       "
     ></Planet>
@@ -31,32 +31,37 @@
         opacity: isActive ? '1' : '0',
       }"
     >
-      Today
+      {{ isToday ? "Today" : formattedDate }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getAngles, getPosition, increment, radius } from "@/constants";
-import { computed, defineProps, inject, type ComputedRef, type Ref } from "vue";
+import { RADIUS, SMALLEST_RADIUS } from "@/modules/dashboard/constants";
+import { computed, inject, type ComputedRef, type Ref } from "vue";
 import Planet from "../Planet/index.vue";
 import type { Props } from "./types";
+import { getAngles, getPosition } from "../../utils";
+import { format } from "date-fns";
+import { DateFormats } from "@/constants";
 
-const { data, orbitsCount, position } = defineProps<Props>();
+const { day, orbitsCount, position } = defineProps<Props>();
+
+const { array, contact_date } = day;
 
 const deltaY = inject("deltaY") as Ref<number>;
 const current = inject("current") as ComputedRef<number>;
 const centerX = inject("centerX") as ComputedRef<number>;
 
+const angles = getAngles(array.length);
+
 const orbitRadius = computed(
-  () => deltaY.value + radius + increment * (orbitsCount - position)
+  () => deltaY.value + SMALLEST_RADIUS + RADIUS * (orbitsCount - position)
 );
 
-const isTopThreshold = computed(
-  () => deltaY.value >= increment * (position + 1)
-);
+const isTopThreshold = computed(() => deltaY.value >= RADIUS * (position + 1));
 
-const isBottomThreshold = computed(() => orbitRadius.value <= increment * 2.5);
+const isBottomThreshold = computed(() => orbitRadius.value <= RADIUS * 2.5);
 
 const isActive = computed(() => position === current.value);
 
@@ -68,6 +73,9 @@ const isMiddleElement = computed(
   () => (length: number, idx: number) =>
     length % 2 === 1 && Math.floor(length / 2) === idx && isActive.value
 );
+
+const formattedDate = format(contact_date, DateFormats.WeekMonthDay);
+const isToday = format(new Date(), DateFormats.WeekMonthDay) === formattedDate;
 </script>
 
 <style scoped>
@@ -78,15 +86,17 @@ const isMiddleElement = computed(
   border-bottom: none;
   position: absolute;
   transform: translateX(-50%);
-  z-index: 1;
-  transition: 0.5s;
+  transition: 1s;
 }
 .date {
+  padding: 12px;
+  background: rgba(10, 10, 10, 1);
+  font-size: 18px;
+  color: rgba(146, 146, 146, 1);
   position: absolute;
   font-size: 20px;
   color: white;
   transform: translate(-50%, 50%);
-  z-index: 10;
-  transition: 0.5s;
+  transition: 1s;
 }
 </style>
