@@ -7,13 +7,13 @@ import { DateFormats } from "@/constants";
 useOrbits();
 
 const { data, isError, isLoading } = useGetWeekQuery(
-  format(new Date(), DateFormats.YearMonthDay)
+  format(new Date(), DateFormats.YearMonthDay),
 );
 </script>
 
 <template>
-  <main class="container">
-    <div v-if="isError">Error</div>
+  <main class="relative h-screen w-full overflow-hidden">
+    <div v-if="true">Error</div>
     <div v-if="isLoading">Loading</div>
     <template v-if="data?.length">
       <Orbit
@@ -27,12 +27,4 @@ const { data, isError, isLoading } = useGetWeekQuery(
   </main>
 </template>
 
-<style>
-.container {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-</style>
+<style></style>

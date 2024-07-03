@@ -16,13 +16,7 @@ defineProps<Props>();
 
 <style scoped>
 .planet {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  border-radius: 50%;
-  z-index: 10;
-  transform: translate(-50%, 50%);
   transition: 1s;
-  background: blue;
+  @apply absolute z-10 h-5 w-5 -translate-x-1/2 translate-y-1/2 rounded-full bg-blue-700;
 }
 </style>
