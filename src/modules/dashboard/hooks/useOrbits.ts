@@ -2,6 +2,9 @@ import { RADIUS } from "@/modules/dashboard/constants";
 import { computed, onUnmounted } from "vue";
 import { onMounted, provide, ref } from "vue";
 
+let lastScrollTime = 0;
+const scrollCooldown = 1000;
+
 export const useOrbits = () => {
   const windowWidth = ref(window.innerWidth);
 
@@ -14,6 +17,14 @@ export const useOrbits = () => {
   };
 
   const updateDeltaY = (delta: number) => {
+    const now = Date.now();
+
+    if (now - lastScrollTime < scrollCooldown) {
+      return;
+    }
+
+    lastScrollTime = now;
+
     if (deltaY.value === 0 && delta < 0) {
       return;
     }
