@@ -13,7 +13,7 @@ const { data, isError, isLoading } = useGetWeekQuery(
 
 <template>
   <main class="relative h-screen w-full overflow-hidden">
-    <div v-if="true">Error</div>
+    <div v-if="isError">Error</div>
     <div v-if="isLoading">Loading</div>
     <template v-if="data?.length">
       <Orbit

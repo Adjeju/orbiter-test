@@ -14,6 +14,7 @@
       :key="`planet-${position}-${user.id}`"
       :user="user"
       :orbitRadius="orbitRadius"
+      :date="contact_date"
       :position="
         getPosition(
           orbitRadius,
