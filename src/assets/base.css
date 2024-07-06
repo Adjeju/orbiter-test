@@ -7,15 +7,20 @@
 }
 
 body {
-  background: rgba(10, 10, 10, 1);
+  @apply bg-black-secondary;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.gradient-bg {
+  padding: 1px;
+  background: linear-gradient(180deg, #ffffff 0%, #000000 100%);
 }

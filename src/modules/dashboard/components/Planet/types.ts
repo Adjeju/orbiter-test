@@ -5,4 +5,5 @@ export type Props = {
   orbitRadius: number;
   position: { x: number; y: number };
   date: string;
+  canShowCard: boolean;
 };

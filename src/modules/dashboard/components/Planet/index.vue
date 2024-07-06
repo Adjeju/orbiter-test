@@ -6,31 +6,33 @@
       bottom: position.y + 'px',
     }"
   >
-    <HoverCardRoot :openDelay="500" v-model:open="hoverState">
+    <HoverCardRoot
+      :openDelay="500"
+      :open="hoverState"
+      @update:open="handleOpen"
+    >
       <HoverCardTrigger>
-        <AvatarRoot
-          class="inline-flex h-[68px] w-[68px] select-none rounded-full border-8 border-[rgba(10,_10,_10,_1)] align-middle"
-        >
-          <AvatarImage
-            :src="user.img"
-            :alt="user.name"
-            class="h-full w-full rounded-[inherit] object-cover"
-          />
-          <AvatarFallback class="h-full w-full rounded-[inherit] object-cover">
-            <img
-              :src="avatarFallbackSrc"
-              alt="avatar-fallback"
-              class="h-full w-full rounded-[inherit] object-cover"
-            />
-          </AvatarFallback>
-        </AvatarRoot>
+        <div class="gradient-bg border-black-secondary rounded-full border-8">
+          <AvatarRoot
+            class="inline-flex h-[68px] w-[68px] select-none rounded-full align-middle"
+          >
+            <AvatarImage :src="user.img" :alt="user.name" class="avatar" />
+            <AvatarFallback class="avatar">
+              <img
+                :src="avatarFallbackSrc"
+                alt="avatar-fallback"
+                class="avatar"
+              />
+            </AvatarFallback>
+          </AvatarRoot>
+        </div>
       </HoverCardTrigger>
       <HoverCardPortal>
         <Transition name="fade">
           <HoverCardContent
             side="right"
             align="start"
-            :sideOffset="-68"
+            :sideOffset="-84"
             :alignOffset="-15"
           >
             <Card :user="user" :date="date" />
@@ -57,9 +59,14 @@ import {
 import avatarFallbackSrc from "@/assets/images/avatar-fallback.png";
 import { ref, Transition } from "vue";
 
+const props = defineProps<Props>();
 const hoverState = ref(false);
 
-defineProps<Props>();
+const handleOpen = (open: boolean) => {
+  if (props.canShowCard) {
+    hoverState.value = open;
+  }
+};
 </script>
 
 <style scoped>
@@ -67,6 +74,7 @@ defineProps<Props>();
   transition: 1s;
   @apply pointer-events-auto absolute z-10 -translate-x-1/2 translate-y-1/2;
 }
+.avatar {
+  @apply h-full w-full rounded-[inherit] object-cover;
+}
 </style>
-border: 1px solid; border-image-source: linear-gradient(180deg, #FFFFFF 0%,
-#000000 100%);

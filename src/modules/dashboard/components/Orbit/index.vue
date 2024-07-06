@@ -16,6 +16,7 @@
       :user="user"
       :orbitRadius="orbitRadius"
       :date="contact_date"
+      :canShowCard="canShowCard"
       :position="
         getPosition(
           orbitRadius,
@@ -79,6 +80,10 @@ const isMiddleElement = computed(
 
 const formattedDate = format(contact_date, DateFormats.WeekMonthDay);
 const isToday = format(new Date(), DateFormats.WeekMonthDay) === formattedDate;
+
+const canShowCard = computed(
+  () => current.value <= position && position < current.value + 7,
+);
 </script>
 
 <style scoped>
@@ -88,6 +93,6 @@ const isToday = format(new Date(), DateFormats.WeekMonthDay) === formattedDate;
 }
 .date {
   transition: 1s;
-  @apply absolute -translate-x-1/2 translate-y-1/2 bg-[rgba(10,_10,_10,_1)] p-3 text-base text-[rgba(146,_146,_146,_1)];
+  @apply bg-black-secondary text-muted absolute -translate-x-1/2 translate-y-1/2 p-3 text-base;
 }
 </style>

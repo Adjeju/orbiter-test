@@ -1,24 +1,22 @@
 <template>
-  <div
-    class="max-w-[503px] rounded-xl border border-white bg-[rgba(10,_10,_10,_1)] text-white"
-  >
-    <div class="flex items-center gap-[15px] px-2.5 py-[9px]">
-      <AvatarRoot
-        class="inline-flex h-[100px] w-[100px] select-none rounded-full align-middle"
-      >
-        <AvatarImage
-          class="h-full w-full rounded-[inherit] object-cover"
-          :src="img"
-          :alt="name"
-        />
-        <AvatarFallback class="h-full w-full rounded-[inherit] object-cover">
-          <img
-            :src="avatarFallbackSrc"
-            alt="avatar-fallback"
-            class="h-full w-full rounded-[inherit] object-cover"
-          />
-        </AvatarFallback>
-      </AvatarRoot>
+  <div class="gradient-bg max-w-[503px] rounded-xl text-white">
+    <div
+      class="bg-black-secondary flex items-center gap-[15px] rounded-t-[inherit] px-2.5 py-[9px]"
+    >
+      <div class="gradient-bg select-none rounded-full">
+        <AvatarRoot
+          class="inline-flex h-[100px] w-[100px] rounded-[inherit] align-middle"
+        >
+          <AvatarImage class="avatar" :src="img" :alt="name" />
+          <AvatarFallback class="avatar">
+            <img
+              :src="avatarFallbackSrc"
+              alt="avatar-fallback"
+              class="avatar"
+            />
+          </AvatarFallback>
+        </AvatarRoot>
+      </div>
       <div class="flex flex-1 flex-col gap-[5px]">
         <div class="text-base font-bold">{{ name }}</div>
         <div class="text-xs">{{ position }}</div>
@@ -28,13 +26,10 @@
             <AvatarRoot
               v-for="(image, idx) in images"
               :key="image"
-              :class="`inline-flex h-5 w-5 select-none rounded-full border border-white ${idx !== 0 ? '-ml-1' : 'ml-0'}`"
+              class="inline-flex h-5 w-5 select-none rounded-full border border-white"
+              :class="idx !== 0 ? '-ml-1' : 'ml-0'"
             >
-              <AvatarImage
-                class="h-full w-full rounded-[inherit] object-cover"
-                :src="image"
-                alt="person"
-              />
+              <AvatarImage class="avatar" :src="image" alt="person" />
             </AvatarRoot>
           </div>
           <div class="text-xs">
@@ -42,19 +37,23 @@
           </div>
         </div>
       </div>
-      <img
-        src="https://s3-alpha-sig.figma.com/img/66e9/ee01/018be20926c8b281df498206d4778368?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TGHfWX9fo9MABpA~BtlRgMyw8WK0OyYirG6M~7QKKqu90xpOvjIr6LOvwHxGExsztE14Mh2xOPJaVQBOMsQKk6Y06MyFS16uE8gwPsavlLPhpNbENDu7XNH5ZXwh5Gce~7lC5Blp3qvnEdRDaWSOhE-e4sLFnjdjZfrbFEGFbIRqqEzS1ZLxEOAtqTgl6UB9hb5C1WcdNcZR5M46H1~DUKQUpZzfTzANA4t4GL1YqeVR72UjSv2GRQMIk0jCQ9CPO1Rp5marckz4MLsyt3UyWTg0hmjD5YkAY~KBxcH50ojO3wG79tMVy8xRtRBMYi0cqTUBhaYb0RkbUIUrl798Eg__"
-        alt="logo"
-        class="h-12 w-12 self-start rounded-[4px] border border-white"
-      />
+      <div class="gradient-bg self-start rounded-[4px]">
+        <img
+          src="https://s3-alpha-sig.figma.com/img/66e9/ee01/018be20926c8b281df498206d4778368?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TGHfWX9fo9MABpA~BtlRgMyw8WK0OyYirG6M~7QKKqu90xpOvjIr6LOvwHxGExsztE14Mh2xOPJaVQBOMsQKk6Y06MyFS16uE8gwPsavlLPhpNbENDu7XNH5ZXwh5Gce~7lC5Blp3qvnEdRDaWSOhE-e4sLFnjdjZfrbFEGFbIRqqEzS1ZLxEOAtqTgl6UB9hb5C1WcdNcZR5M46H1~DUKQUpZzfTzANA4t4GL1YqeVR72UjSv2GRQMIk0jCQ9CPO1Rp5marckz4MLsyt3UyWTg0hmjD5YkAY~KBxcH50ojO3wG79tMVy8xRtRBMYi0cqTUBhaYb0RkbUIUrl798Eg__"
+          alt="logo"
+          class="h-12 w-12 rounded-[inherit]"
+        />
+      </div>
     </div>
-    <div class="rounded-b-xl bg-[rgba(10,_10,_10,_0.65)] p-2.5">
-      <div class="flex items-center gap-2.5 bg-[rgba(10,_10,_10,_0.85)] p-2.5">
+    <div class="rounded-b-[inherit] bg-[rgba(_22,_22,_22,_255)] p-2.5">
+      <div class="flex items-center gap-2.5 p-2.5">
         <img :src="mailSrc" alt="mail-logo" />
         <div>Reply from Emery Wells</div>
       </div>
-      <div class="flex flex-col gap-2.5 p-2.5">
-        <div class="flex justify-between text-[rgba(146,_146,_146,_1)]">
+      <div
+        class="flex flex-col gap-2.5 rounded-lg bg-[rgba(10,_10,_10,_0.85)] p-2.5"
+      >
+        <div class="text-muted flex justify-between">
           <div>{{ format(date, DateFormats.Full) }}</div>
           <div>{{ dayDifference() }}</div>
         </div>
@@ -94,7 +93,6 @@ const { user, date } = defineProps<Props>();
 
 const {
   city,
-  created_at,
   img,
   name,
   position,
@@ -113,4 +111,8 @@ const showHideMessage = () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.avatar {
+  @apply h-full w-full rounded-[inherit] object-cover;
+}
+</style>
