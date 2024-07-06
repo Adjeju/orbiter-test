@@ -26,39 +26,14 @@
         <div class="flex items-center gap-1.5">
           <div class="flex">
             <AvatarRoot
-              class="inline-flex h-5 w-5 select-none rounded-full border border-white"
+              v-for="(image, idx) in images"
+              :key="image"
+              :class="`inline-flex h-5 w-5 select-none rounded-full border border-white ${idx !== 0 ? '-ml-1' : 'ml-0'}`"
             >
               <AvatarImage
                 class="h-full w-full rounded-[inherit] object-cover"
-                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
-                alt="Colm Tuite"
-              />
-            </AvatarRoot>
-            <AvatarRoot
-              class="-ml-1 inline-flex h-5 w-5 select-none rounded-full border border-white"
-            >
-              <AvatarImage
-                class="h-full w-full rounded-[inherit] object-cover"
-                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
-                alt="Colm Tuite"
-              />
-            </AvatarRoot>
-            <AvatarRoot
-              class="-ml-1 inline-flex h-5 w-5 select-none rounded-full border border-white"
-            >
-              <AvatarImage
-                class="h-full w-full rounded-[inherit] object-cover"
-                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
-                alt="Colm Tuite"
-              />
-            </AvatarRoot>
-            <AvatarRoot
-              class="-ml-1 inline-flex h-5 w-5 select-none rounded-full border border-white"
-            >
-              <AvatarImage
-                class="h-full w-full rounded-[inherit] object-cover"
-                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
-                alt="Colm Tuite"
+                :src="image"
+                alt="person"
               />
             </AvatarRoot>
           </div>
@@ -111,6 +86,7 @@ import type { Props } from "./type";
 import avatarFallbackSrc from "@/assets/images/avatar-fallback.png";
 import { differenceInDays, format } from "date-fns";
 import { DateFormats } from "@/constants";
+import { images } from "./constants";
 
 const isShowed = ref(false);
 

@@ -3,7 +3,7 @@ import { computed, onUnmounted } from "vue";
 import { onMounted, provide, ref } from "vue";
 
 let lastScrollTime = 0;
-const scrollCooldown = 1000;
+const scrollCooldown = 700;
 
 export const useOrbits = () => {
   const windowWidth = ref(window.innerWidth);

@@ -6,7 +6,7 @@
       bottom: position.y + 'px',
     }"
   >
-    <HoverCardRoot :openDelay="500">
+    <HoverCardRoot :openDelay="500" v-model:open="hoverState">
       <HoverCardTrigger>
         <AvatarRoot
           class="inline-flex h-[68px] w-[68px] select-none rounded-full border-8 border-[rgba(10,_10,_10,_1)] align-middle"
@@ -53,6 +53,9 @@ import {
 } from "radix-vue";
 
 import avatarFallbackSrc from "@/assets/images/avatar-fallback.png";
+import { ref } from "vue";
+
+const hoverState = ref(false);
 
 defineProps<Props>();
 </script>
