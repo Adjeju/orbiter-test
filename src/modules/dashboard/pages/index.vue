@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import Orbit from "../components/Orbit/index.vue";
 import { useGetWeekQuery, useOrbits } from "../hooks";
 import { DateFormats } from "@/constants";
+import Loading from "vue-loading-overlay";
 
 useOrbits();
 
@@ -13,8 +14,20 @@ const { data, isError, isLoading } = useGetWeekQuery(
 
 <template>
   <main class="relative h-screen w-full overflow-hidden">
-    <div v-if="isError">Error</div>
-    <div v-if="isLoading">Loading</div>
+    <div
+      v-if="isError"
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl text-red-700"
+    >
+      Error
+    </div>
+    <template v-if="isLoading">
+      <Loading
+        :active="false"
+        :is-full-page="false"
+        background-color="#000"
+        color="#fff"
+      ></Loading>
+    </template>
     <template v-if="data?.length">
       <Orbit
         v-for="(day, idx) in data"

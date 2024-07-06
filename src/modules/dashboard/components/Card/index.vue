@@ -1,5 +1,5 @@
 <template>
-  <div class="gradient-bg max-w-[503px] rounded-xl text-white">
+  <div class="gradient-bg max-w-[503px] select-none rounded-xl text-white">
     <div
       class="bg-black-secondary flex items-center gap-[15px] rounded-t-[inherit] px-2.5 py-[9px]"
     >
@@ -61,11 +61,17 @@
           <div class="text-base font-bold">
             {{ message_head }}
           </div>
-          <div :class="isShowed ? 'line-clamp-none' : 'line-clamp-1'">
+          <div
+            class="message-content"
+            :class="isShowed ? 'expanded' : 'collapsed'"
+          >
             {{ message }}
           </div>
         </div>
-        <div class="flex w-max items-center gap-2.5" @click="showHideMessage">
+        <div
+          class="flex w-max cursor-pointer items-center gap-2.5"
+          @click="showHideMessage"
+        >
           <div>{{ isShowed ? "Less" : "More" }}</div>
           <img :src="isShowed ? chevronUpSrc : chevronDownSrc" alt="chevron" />
         </div>
@@ -114,5 +120,15 @@ const showHideMessage = () => {
 <style scoped>
 .avatar {
   @apply h-full w-full rounded-[inherit] object-cover;
+}
+
+.message-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  max-height: 1.5rem;
+}
+
+.message-content.expanded {
+  max-height: 500px;
 }
 </style>

@@ -5,6 +5,7 @@
       left: position.x + 'px',
       bottom: position.y + 'px',
     }"
+    :class="canShowCard && 'cursor-pointer'"
   >
     <HoverCardRoot
       :openDelay="500"
