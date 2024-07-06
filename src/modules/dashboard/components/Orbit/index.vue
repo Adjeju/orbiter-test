@@ -9,6 +9,7 @@
       opacity: isTopThreshold || isBottomThreshold ? '0' : '1',
     }"
   >
+    <img :src="orbitSrc" alt="orbit" class="h-[inherit] w-[inherit]" />
     <Planet
       v-for="(user, idx) in array"
       :key="`planet-${position}-${user.id}`"
@@ -45,6 +46,7 @@ import type { Props } from "./types";
 import { getAngles, getPosition } from "../../utils";
 import { format } from "date-fns";
 import { DateFormats } from "@/constants";
+import orbitSrc from "@/assets/icons/orbit.svg";
 
 const { day, orbitsCount, position } = defineProps<Props>();
 
@@ -82,7 +84,7 @@ const isToday = format(new Date(), DateFormats.WeekMonthDay) === formattedDate;
 <style scoped>
 .orbit {
   transition: 1s;
-  @apply absolute -translate-x-1/2 rounded-t-full border border-b-0 border-white;
+  @apply pointer-events-none absolute -translate-x-1/2 rounded-t-full;
 }
 .date {
   transition: 1s;

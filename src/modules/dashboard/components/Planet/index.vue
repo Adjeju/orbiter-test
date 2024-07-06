@@ -26,14 +26,16 @@
         </AvatarRoot>
       </HoverCardTrigger>
       <HoverCardPortal>
-        <HoverCardContent
-          side="right"
-          align="start"
-          :sideOffset="-68"
-          :alignOffset="-15"
-        >
-          <Card :user="user" :date="date" />
-        </HoverCardContent>
+        <Transition name="fade">
+          <HoverCardContent
+            side="right"
+            align="start"
+            :sideOffset="-68"
+            :alignOffset="-15"
+          >
+            <Card :user="user" :date="date" />
+          </HoverCardContent>
+        </Transition>
       </HoverCardPortal>
     </HoverCardRoot>
   </div>
@@ -53,7 +55,7 @@ import {
 } from "radix-vue";
 
 import avatarFallbackSrc from "@/assets/images/avatar-fallback.png";
-import { ref } from "vue";
+import { ref, Transition } from "vue";
 
 const hoverState = ref(false);
 
@@ -63,6 +65,8 @@ defineProps<Props>();
 <style scoped>
 .planet {
   transition: 1s;
-  @apply absolute z-10 -translate-x-1/2 translate-y-1/2;
+  @apply pointer-events-auto absolute z-10 -translate-x-1/2 translate-y-1/2;
 }
 </style>
+border: 1px solid; border-image-source: linear-gradient(180deg, #FFFFFF 0%,
+#000000 100%);
