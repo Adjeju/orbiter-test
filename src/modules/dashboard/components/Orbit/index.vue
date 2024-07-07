@@ -71,9 +71,7 @@ const isTopThreshold = computed(
   () => deltaY.value >= radius.value * (position + 1),
 );
 
-const isBottomThreshold = computed(
-  () => orbitRadius.value <= radius.value * 2.5,
-);
+const isBottomThreshold = computed(() => orbitRadius.value < radius.value * 3);
 
 const isActive = computed(() => position === current.value);
 
