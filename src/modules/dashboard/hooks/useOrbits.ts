@@ -1,5 +1,6 @@
 import { computed, onUnmounted } from "vue";
 import { onMounted, provide, ref } from "vue";
+import { injectionKeys } from "../constants";
 
 let lastScrollTime = 0;
 const scrollCooldown = 700;
@@ -10,7 +11,7 @@ export const useOrbits = () => {
 
   const deltaY = ref(0);
 
-  provide("deltaY", deltaY);
+  provide(injectionKeys.deltaY, deltaY);
 
   const updateWindowSize = () => {
     windowWidth.value = window.innerWidth;
@@ -23,8 +24,8 @@ export const useOrbits = () => {
 
   const radius = computed(() => Math.floor((windowHeight.value - 150) / 9));
 
-  provide("smallestRadius", smallestRadius);
-  provide("radius", radius);
+  provide(injectionKeys.smallestRadius, smallestRadius);
+  provide(injectionKeys.radius, radius);
 
   const updateDeltaY = (delta: number) => {
     const now = Date.now();
@@ -63,6 +64,6 @@ export const useOrbits = () => {
   const centerX = computed(() => windowWidth.value / 2);
   const current = computed(() => Math.floor(deltaY.value / radius.value));
 
-  provide("centerX", centerX);
-  provide("current", current);
+  provide(injectionKeys.centerX, centerX);
+  provide(injectionKeys.current, current);
 };

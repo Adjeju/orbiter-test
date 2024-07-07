@@ -47,16 +47,20 @@ import { getAngles, getPosition } from "../../utils";
 import { format } from "date-fns";
 import { DateFormats } from "@/constants";
 import orbitSrc from "@/assets/icons/orbit.svg";
+import { injectionKeys } from "../../constants";
 
 const { day, orbitsCount, position } = defineProps<Props>();
 
 const { array, contact_date } = day;
 
-const deltaY = inject("deltaY") as Ref<number>;
-const current = inject("current") as ComputedRef<number>;
-const centerX = inject("centerX") as ComputedRef<number>;
-const smallestRadius = inject("smallestRadius") as ComputedRef<number>;
-const radius = inject("radius") as ComputedRef<number>;
+const deltaY = inject(injectionKeys.deltaY) as Ref<number>;
+const current = inject(injectionKeys.current) as ComputedRef<number>;
+const centerX = inject(injectionKeys.centerX) as ComputedRef<number>;
+
+const radius = inject(injectionKeys.radius) as ComputedRef<number>;
+const smallestRadius = inject(
+  injectionKeys.smallestRadius,
+) as ComputedRef<number>;
 
 const angles = getAngles(array.length);
 
