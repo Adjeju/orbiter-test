@@ -21,7 +21,7 @@
         getPosition(
           orbitRadius,
           isMiddleElement(array.length, idx)
-            ? angles[idx] + Math.PI / 36
+            ? angles[idx] + Math.PI / 30
             : angles[idx],
         )
       "
@@ -40,7 +40,6 @@
 </template>
 
 <script setup lang="ts">
-import { RADIUS, SMALLEST_RADIUS } from "@/modules/dashboard/constants";
 import { computed, inject, type ComputedRef, type Ref } from "vue";
 import Planet from "../Planet/index.vue";
 import type { Props } from "./types";
@@ -56,16 +55,25 @@ const { array, contact_date } = day;
 const deltaY = inject("deltaY") as Ref<number>;
 const current = inject("current") as ComputedRef<number>;
 const centerX = inject("centerX") as ComputedRef<number>;
+const smallestRadius = inject("smallestRadius") as ComputedRef<number>;
+const radius = inject("radius") as ComputedRef<number>;
 
 const angles = getAngles(array.length);
 
 const orbitRadius = computed(
-  () => deltaY.value + SMALLEST_RADIUS + RADIUS * (orbitsCount - position),
+  () =>
+    deltaY.value +
+    smallestRadius.value +
+    radius.value * (orbitsCount - position),
 );
 
-const isTopThreshold = computed(() => deltaY.value >= RADIUS * (position + 1));
+const isTopThreshold = computed(
+  () => deltaY.value >= radius.value * (position + 1),
+);
 
-const isBottomThreshold = computed(() => orbitRadius.value <= RADIUS * 2.5);
+const isBottomThreshold = computed(
+  () => orbitRadius.value <= radius.value * 2.5,
+);
 
 const isActive = computed(() => position === current.value);
 
@@ -93,6 +101,6 @@ const canShowCard = computed(
 }
 .date {
   transition: 1s;
-  @apply bg-black-secondary text-muted absolute -translate-x-1/2 translate-y-1/2 p-3 text-base;
+  @apply 3xl:p-3 3xl:text-base absolute -translate-x-1/2 translate-y-1/2 bg-black-secondary p-1 text-sm text-muted;
 }
 </style>

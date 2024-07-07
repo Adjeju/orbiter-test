@@ -13,9 +13,12 @@
       @update:open="handleOpen"
     >
       <HoverCardTrigger>
-        <div class="gradient-bg border-black-secondary rounded-full border-8">
+        <div
+          ref="avatarRef"
+          class="gradient-bg 3xl:border-8 rounded-full border-4 border-black-secondary"
+        >
           <AvatarRoot
-            class="inline-flex h-[68px] w-[68px] select-none rounded-full align-middle"
+            class="3xl:h-[68px] 3xl:w-[68px] inline-flex h-8 w-8 select-none rounded-full align-middle"
           >
             <AvatarImage :src="user.img" :alt="user.name" class="avatar" />
             <AvatarFallback class="avatar">
@@ -33,8 +36,7 @@
           <HoverCardContent
             side="right"
             align="start"
-            :sideOffset="-84"
-            :alignOffset="-15"
+            :side-offset="-alignOffset"
           >
             <Card :user="user" :date="date" />
           </HoverCardContent>
@@ -58,10 +60,18 @@ import {
 } from "radix-vue";
 
 import avatarFallbackSrc from "@/assets/images/avatar-fallback.png";
-import { ref, Transition } from "vue";
+import { ref, Transition, watchEffect } from "vue";
 
 const props = defineProps<Props>();
+
 const hoverState = ref(false);
+const avatarRef = ref<HTMLDivElement | undefined>();
+
+const alignOffset = ref(0);
+
+watchEffect(() => {
+  if (avatarRef.value) alignOffset.value = avatarRef.value.offsetWidth;
+});
 
 const handleOpen = (open: boolean) => {
   if (props.canShowCard) {

@@ -1,11 +1,13 @@
 <template>
-  <div class="gradient-bg max-w-[503px] select-none rounded-xl text-white">
+  <div
+    class="gradient-bg 3xl:max-w-[503px] max-w-[400px] select-none rounded-xl text-white"
+  >
     <div
-      class="bg-black-secondary flex items-center gap-[15px] rounded-t-[inherit] px-2.5 py-[9px]"
+      class="3xl:gap-[15px] flex items-center gap-2 rounded-t-[inherit] bg-black-secondary px-2.5 py-[9px]"
     >
       <div class="gradient-bg select-none rounded-full">
         <AvatarRoot
-          class="inline-flex h-[100px] w-[100px] rounded-[inherit] align-middle"
+          class="3xl:h-[100px] 3xl:w-[100px] inline-flex h-20 w-20 rounded-[inherit] align-middle"
         >
           <AvatarImage class="avatar" :src="img" :alt="name" />
           <AvatarFallback class="avatar">
@@ -17,7 +19,7 @@
           </AvatarFallback>
         </AvatarRoot>
       </div>
-      <div class="flex flex-1 flex-col gap-[5px]">
+      <div class="3xl:gap-[5px] flex flex-1 flex-col gap-0.5">
         <div class="text-base font-bold">{{ name }}</div>
         <div class="text-xs">{{ position }}</div>
         <div class="text-xs">{{ city }}</div>
@@ -41,35 +43,35 @@
         <img
           src="https://s3-alpha-sig.figma.com/img/66e9/ee01/018be20926c8b281df498206d4778368?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TGHfWX9fo9MABpA~BtlRgMyw8WK0OyYirG6M~7QKKqu90xpOvjIr6LOvwHxGExsztE14Mh2xOPJaVQBOMsQKk6Y06MyFS16uE8gwPsavlLPhpNbENDu7XNH5ZXwh5Gce~7lC5Blp3qvnEdRDaWSOhE-e4sLFnjdjZfrbFEGFbIRqqEzS1ZLxEOAtqTgl6UB9hb5C1WcdNcZR5M46H1~DUKQUpZzfTzANA4t4GL1YqeVR72UjSv2GRQMIk0jCQ9CPO1Rp5marckz4MLsyt3UyWTg0hmjD5YkAY~KBxcH50ojO3wG79tMVy8xRtRBMYi0cqTUBhaYb0RkbUIUrl798Eg__"
           alt="logo"
-          class="h-12 w-12 rounded-[inherit]"
+          class="3xl:h-12 3xl:w-12 h-8 w-8 rounded-[inherit]"
         />
       </div>
     </div>
     <div class="rounded-b-[inherit] bg-[rgba(_22,_22,_22,_255)] p-2.5">
-      <div class="flex items-center gap-2.5 p-2.5">
+      <div class="3xl:text-base flex items-center gap-2.5 p-2.5 text-sm">
         <img :src="mailSrc" alt="mail-logo" />
         <div>Reply from Emery Wells</div>
       </div>
       <div
         class="flex flex-col gap-2.5 rounded-lg bg-[rgba(10,_10,_10,_0.85)] p-2.5"
       >
-        <div class="text-muted flex justify-between">
+        <div class="3xl:text-base flex justify-between text-sm text-muted">
           <div>{{ format(date, DateFormats.Full) }}</div>
           <div>{{ dayDifference() }}</div>
         </div>
         <div>
-          <div class="text-base font-bold">
+          <div class="3xl:text-base text-sm font-bold">
             {{ message_head }}
           </div>
           <div
-            class="message-content"
+            class="message-content 3xl:text-base text-sm"
             :class="isShowed ? 'expanded' : 'collapsed'"
           >
             {{ message }}
           </div>
         </div>
         <div
-          class="flex w-max cursor-pointer items-center gap-2.5"
+          class="3xl:text-base flex w-max cursor-pointer items-center gap-2.5 text-sm"
           @click="showHideMessage"
         >
           <div>{{ isShowed ? "Less" : "More" }}</div>

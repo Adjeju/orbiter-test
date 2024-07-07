@@ -7,6 +7,9 @@ module.exports = {
         "black-secondary": "rgba(10, 10, 10, 1)",
         muted: "rgba(146, 146, 146, 1)",
       },
+      screens: {
+        "3xl": "1700px",
+      },
     },
   },
   plugins: [],
