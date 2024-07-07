@@ -20,14 +20,13 @@ const { data, isError, isLoading } = useGetWeekQuery(
     >
       Error
     </div>
-    <template v-if="isLoading">
-      <Loading
-        :active="false"
-        :is-full-page="false"
-        background-color="#000"
-        color="#fff"
-      ></Loading>
-    </template>
+    <Loading
+      v-if="isLoading"
+      :active="isLoading"
+      :is-full-page="true"
+      background-color="#000"
+      color="#fff"
+    ></Loading>
     <template v-if="data?.length">
       <Orbit
         v-for="(day, idx) in data"
